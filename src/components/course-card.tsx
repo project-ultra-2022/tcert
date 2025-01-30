@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   Card,
   CardContent,
@@ -6,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Course } from "./course-carousel";
+import Link from "next/link";
 
 export function CourseCard({ course }: { course: Course }) {
   return (
@@ -44,7 +46,9 @@ export function CourseCard({ course }: { course: Course }) {
             $ {course.originalPrice}
           </span>
         </div>
-        <Button>Ver Ahora</Button>
+        <Link href={`/courses/${course.id}`}>
+          <Button>Ver Ahora</Button>
+        </Link>
       </CardFooter>
     </Card>
   );
