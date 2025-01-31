@@ -31,13 +31,11 @@ export default function ContactForm() {
         {/* Title section - visible on all screens */}
         <div className="mb-8 sm:hidden">
           <h1 className="text-4xl font-bold tracking-tight">
-            NEQUE PORRO
-            <br />
-            QUISQUAM
+            FORMULARIO DE CONTACTO
           </h1>
           <p className="mt-4 text-gray-600">
-            Etiam eu vulputate nisi. Nunc id diam purus. Cras iaculis vestibulum
-            ultrices.
+            Completa el formulario y nos pondremos en contacto contigo lo antes
+            posible
           </p>
         </div>
 
@@ -48,16 +46,16 @@ export default function ContactForm() {
               FORMULARIO DE CONTACTO
             </h1>
             <p className="mt-4 text-gray-600">
-              Etiam eu vulputate nisi. Nunc id diam purus. Cras iaculis
-              vestibulum ultrices.
+              Completa el formulario y nos pondremos en contacto contigo lo
+              antes posible
             </p>
-            <div className="text-4xl text-indigo-600">&quot;</div>
-            <p className="mt-4 text-gray-600">
-              Mauris venenatis ultrices elit id mattis. Quisque dignissim magna
-              vel erat vulputate egestas. Maecenas lacus mauris, ullamcorper in
-              aliquet ac.
+
+            <p className="text-gray-700 text-3xl my-5 font-light">
+              <span className="text-4xl mt-1 text-indigo-600">&quot;</span>
+              El conocimiento es el puente hacia el progreso, y cada
+              certificación es un paso más hacia el futuro que construimos.
+              <span className="text-4xl mt-1 text-indigo-600">&quot; </span>
             </p>
-            <p className="mt-4 text-sm text-gray-500">_ [Autor]</p>
           </div>
 
           {/* Right Column - Form */}

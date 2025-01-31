@@ -69,7 +69,7 @@ export default function CourseDetail() {
 
   return (
     <div className="max-h-screen py-16 bg-gradient-to-tr from-[#C8D9E7] via-gray-100 to-white">
-      <div className="max-w-7xl mx-auto px-4 py-8 md:px-6">
+      <div className="max-w-[90%] mx-auto px-4 py-8 md:px-6">
         {/* Breadcrumb */}
         <nav className="flex items-center text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:text-gray-700">
@@ -94,6 +94,7 @@ export default function CourseDetail() {
               {course?.title}
             </h1>
             <p className="text-gray-600 mb-8">{course?.description}</p>
+            <div className="w-full h-px bg-gray-500/20 my-4" />
 
             {/* Tabs - Desktop */}
             <div className="hidden md:block border-b border-gray-200">

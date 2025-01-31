@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,12 +12,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState } from "react";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleScroll = (sectionId: string) => {
+    if (pathname !== "/") {
+      router.push(`/#${sectionId}`);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
-    <header className="fixed top-2 left-0 right-0 max-w-[98%] mx-auto z-50 backdrop-blur-lg bg-[#670EE2]/5  rounded-lg px-10">
+    <header className="fixed top-2 left-0 right-0 max-w-[98%] mx-auto z-50 backdrop-blur-lg bg-[#670EE2]/5 rounded-lg px-10">
       <nav className="flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
           <Image
@@ -30,35 +45,35 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link
-            href="/acerca-de"
+          <button
+            onClick={() => handleScroll("vision")}
             className="text-[#331263] font-extralight hover:text-[#670EE2]"
           >
-            Acerca de
-          </Link>
-          <Link
-            href="/cursos"
+            Sobre nosotros
+          </button>
+          <button
+            onClick={() => handleScroll("courses")}
             className="text-[#331263] font-extralight hover:text-[#670EE2]"
           >
             Cursos
-          </Link>
-          <Link
-            href="/contactanos"
+          </button>
+          <button
+            onClick={() => handleScroll("contact")}
             className="text-[#331263] font-extralight hover:text-[#670EE2]"
           >
-            Contactanos
-          </Link>
+            Contáctanos
+          </button>
         </div>
 
         <div className="hidden md:flex items-center gap-4">
           <Button variant="outline" asChild>
-            <Link href="/iniciar-sesion">Iniciar sesión</Link>
+            <Link href="/">Iniciar sesión</Link>
           </Button>
           <Button
             className="text-white bg-[#670EE2] hover:bg-[#670EE2]/90"
             asChild
           >
-            <Link href="/registrarse">Registrarse</Link>
+            <Link href="/">Registrarse</Link>
           </Button>
         </div>
 
@@ -73,14 +88,15 @@ export function Navbar() {
           <SheetContent side="right" className="w-full p-0">
             <div className="h-full bg-gradient-to-b from-purple-600 to-red-400 text-white p-6">
               <SheetHeader className="flex justify-end">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setOpen(false)}
-                  className="text-white"
-                >
-                  <X className="h-6 w-6" />
-                </Button>
+                <DialogTitle className="flex items-center">
+                  <Image
+                    src="/logo/text/white.png"
+                    alt="T-Cert Logo"
+                    width={80}
+                    height={20}
+                    className="h-5 w-auto"
+                  />
+                </DialogTitle>
               </SheetHeader>
               <div className="flex flex-col items-center gap-8 mt-8">
                 <Button
@@ -88,7 +104,7 @@ export function Navbar() {
                   className="text-white text-xl w-full"
                   asChild
                 >
-                  <Link href="/crear-cuenta" onClick={() => setOpen(false)}>
+                  <Link href="/" onClick={() => setOpen(false)}>
                     Registrarse
                   </Link>
                 </Button>
@@ -97,7 +113,7 @@ export function Navbar() {
                   className="text-white text-xl w-full"
                   asChild
                 >
-                  <Link href="/iniciar-sesion" onClick={() => setOpen(false)}>
+                  <Link href="/" onClick={() => setOpen(false)}>
                     Iniciar sesión
                   </Link>
                 </Button>
@@ -105,29 +121,32 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   className="text-white text-xl w-full"
-                  asChild
+                  onClick={() => {
+                    handleScroll("vision");
+                    setOpen(false);
+                  }}
                 >
-                  <Link href="/acerca-de" onClick={() => setOpen(false)}>
-                    Acerca de nosotros
-                  </Link>
+                  Sobre nosotros
                 </Button>
                 <Button
                   variant="ghost"
                   className="text-white text-xl w-full"
-                  asChild
+                  onClick={() => {
+                    handleScroll("courses");
+                    setOpen(false);
+                  }}
                 >
-                  <Link href="/cursos" onClick={() => setOpen(false)}>
-                    Cursos
-                  </Link>
+                  Cursos
                 </Button>
                 <Button
                   variant="ghost"
                   className="text-white text-xl w-full"
-                  asChild
+                  onClick={() => {
+                    handleScroll("contact");
+                    setOpen(false);
+                  }}
                 >
-                  <Link href="/contactanos" onClick={() => setOpen(false)}>
-                    Contactanos
-                  </Link>
+                  Contáctanos
                 </Button>
               </div>
             </div>
