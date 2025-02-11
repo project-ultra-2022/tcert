@@ -2,15 +2,16 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import DotSquare from "./dot-square";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface SectionWithImageProps {
   miniTitle: string;
   title: string;
   subtitle: string;
-  imageSrc: string;
+  imageSrc: string[];
   right?: boolean;
   badges?: string[];
   buttonText?: string;
@@ -28,29 +29,71 @@ export default function SectionWithImage({
   showButton = true,
 }: SectionWithImageProps) {
   const router = useRouter();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
-  return (
-    <section className="max-w-[90%] mx-auto bg-gradient-to-bl from-[#C8D9E7]/50 to-gray-100 py-8 lg:py-16 px-4">
-      <div
-        className={`lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center ps-5 ${
-          right ? "" : "lg:grid-cols-[auto_1fr]"
-        }`}
-      >
-        {/* Imagen en desktop cuando right=false */}
-        {!right && (
-          <div className="hidden lg:block relative w-full max-w-md mx-auto">
+  // Precargar todas las imágenes
+  useEffect(() => {
+    imageSrc.forEach((src, index) => {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages((prev) => ({ ...prev, [index]: true }));
+      };
+    });
+  }, [imageSrc]);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageSrc.length);
+  };
+
+  const ImageCarousel = ({ images }: { images: string[] }) => {
+    return (
+      <div className="relative w-full max-w-md xl:max-w-2xl mx-auto overflow-hidden rounded-3xl flex flex-col items-center justify-center">
+        {/* Contenedor con todas las imágenes superpuestas */}
+        <div className="relative w-full h-[300px]">
+          {images.map((src, index) => (
             <Image
-              src={imageSrc}
-              alt={title}
+              key={index}
+              src={src}
+              alt={`${title} ${index + 1}`}
               width={600}
               height={600}
-              className="rounded-3xl object-cover w-full h-auto"
-              priority
+              className={`absolute top-0 left-0 w-full h-full object-cover rounded-3xl transition-opacity duration-500 ${
+                index === currentImageIndex ? "opacity-100" : "opacity-0"
+              }`}
+              priority={index === 0} // Solo la primera carga con prioridad
             />
+          ))}
+        </div>
+
+        <button
+          onClick={nextImage}
+          className="bg-[#670EE2] p-3 mt-2 rounded-full shadow-md"
+          aria-label="Next image"
+        >
+          <ChevronDown className="h-6 w-6 text-white" />
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <section className="max-w-[90%] mx-auto bg-gradient-to-bl from-[#C8D9E7]/50 to-gray-100 py-8 lg:py-16 px-4 animation">
+      <div
+        className={`lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center ps-5 ${
+          right ? "" : ""
+        }`}
+      >
+        {!right && (
+          <div className="hidden lg:block relative w-full max-w-md mx-auto">
+            <ImageCarousel images={imageSrc} />
           </div>
         )}
 
-        {/* Texto */}
         <div>
           <div className="space-y-2">
             <h2 className="text-sm uppercase tracking-wide text-muted-foreground text-[#0B001A]">
@@ -73,15 +116,10 @@ export default function SectionWithImage({
 
           <DotSquare />
 
-          {/* Imagen en mobile (50% de ancho y posición dinámica) */}
           <div className="block lg:hidden relative">
-            <div
-              className={`absolute w-1/2 max-w-xs ${
-                right ? "right-10" : "left-1"
-              }`}
-            >
+            <div className="absolute w-[50%] max-w-xs right-10">
               <Image
-                src={imageSrc}
+                src={imageSrc[0] || "/placeholder.svg"}
                 alt={title}
                 width={400}
                 height={400}
@@ -95,7 +133,6 @@ export default function SectionWithImage({
             <p className="text-base text-[#0B001A]">{subtitle}</p>
           </div>
 
-          {/* Botón opcional */}
           {showButton && (
             <Button
               variant={"default"}
@@ -108,17 +145,9 @@ export default function SectionWithImage({
           )}
         </div>
 
-        {/* Imagen en desktop cuando right=true */}
         {right && (
-          <div className="hidden lg:block relative w-full max-w-md mx-auto">
-            <Image
-              src={imageSrc}
-              alt={title}
-              width={600}
-              height={600}
-              className="rounded-3xl object-cover w-full h-auto"
-              priority
-            />
+          <div className="hidden lg:block relative w-full max-w-md xl:max-w-2xl mx-auto">
+            <ImageCarousel images={imageSrc} />
           </div>
         )}
       </div>

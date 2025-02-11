@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <section
         id="hero"
-        className="max-h-[90vh] mt-10 lg:mt-16 bg-gradient-to-t from-[#C8D9E7] via-gray-100 to-white "
+        className="max-h-[90vh] lg:max-h-[105vh] xl:max-h-[105vh] mt-10 lg:mt-16 bg-gradient-to-t from-[#C8D9E7] via-gray-100 to-white "
       >
         <Hero />
       </section>
@@ -20,7 +20,7 @@ export default function Home() {
           miniTitle="Impulsando tu crecimiento"
           title="SOBRE NOSOTROS"
           subtitle="En T-CERT nos especializamos en potenciar tu crecimiento profesional, ofreciéndote herramientas de calidad diseñadas para prepararte con confianza y éxito ante los desafíos del mercado."
-          imageSrc="/selected-images/four.jpg"
+          imageSrc={["/instructor_teaching.jpeg", "/bg-form-section.webp"]}
           badges={["Compromiso", "Innovación", "Excelencia"]}
           buttonText="VER MÁS"
           showButton={true}

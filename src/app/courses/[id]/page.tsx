@@ -68,7 +68,7 @@ export default function CourseDetail() {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
-    <div className="max-h-screen py-16 bg-gradient-to-tr from-[#C8D9E7] via-gray-100 to-white">
+    <div className="h-screen py-16 my-0 bg-gradient-to-tr from-[#C8D9E7] via-gray-100 to-white">
       <div className="max-w-[90%] mx-auto px-4 py-8 md:px-6">
         {/* Breadcrumb */}
         <nav className="flex items-center text-sm text-gray-500 mb-6">
@@ -97,7 +97,7 @@ export default function CourseDetail() {
             <div className="w-full h-px bg-gray-500/20 my-4" />
 
             {/* Tabs - Desktop */}
-            <div className="hidden md:block border-b border-gray-200">
+            <div className="hidden md:block ">
               <nav className="flex space-x-8">
                 {tabs.map((tab) => (
                   <button

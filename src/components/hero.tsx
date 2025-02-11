@@ -2,55 +2,25 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import DotSquare from "./dot-square";
+import HeroCarousel from "./hero-carousel";
 
 const Hero: React.FC = () => {
   return (
-    <section className="h-[90vh] max-w-[90%] mx-auto bg-gradient-to-b from-white via-sky-100 to-transparent flex flex-col justify-center">
-      <DotSquare top="20%" left="45%" />
-      <DotSquare bottom="20%" right="10%" />
+    <section className="h-[90vh] lg:h-[130vh] xl:h-[120vh] max-w-[99%] mx-auto bg-gradient-to-b from-white via-sky-100 to-transparent flex flex-col justify-center">
+      <span className="xs:hidden sm:hidden lg:block">
+        <DotSquare top="20%" left="15%" />
+        <DotSquare top="15%" right="15%" />
+      </span>
       <div className="max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-7 items-end lg:gap-x-4 lg:gap-y-2 mb-8">
-          <div className="lg:col-span-2">
-            <img
-              src="/selected-images/one.png"
-              alt="Imagen 1"
-              className="rounded-lg shadow-lg w-full h-[170px] object-cover"
-            />
-          </div>
-          <div className="lg:col-span-1 hidden sm:block">
-            <img
-              src="/selected-images/two.png"
-              alt="Imagen 2"
-              className="rounded-lg shadow-lg w-full h-[200px] object-cover sm:w-full"
-            />
-          </div>
-          <div className="lg:col-span-2">
-            <img
-              src="/selected-images/three.jpg"
-              alt="Imagen 3"
-              className="rounded-lg shadow-lg w-full h-[130px] object-cover "
-            />
-          </div>
-          <div className="lg:col-span-2 hidden sm:block">
-            <img
-              src="/selected-images/four.jpg"
-              alt="Imagen 4"
-              className="rounded-lg shadow-lg w-full h-[170px] object-cover"
-            />
-          </div>
-        </div>
-
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl mb-4 font-bold tracking-tight text-[#0B001A]">
           TU RUTA HACIA UNA MEJOR <br />
-          <span className="font-normal">VERSIÓN DE TI MISMO</span>
+          <span className="font-light text-[#303030]">VERSIÓN DE TI MISMO</span>
         </h1>
-        <p className="text-sm sm:text-lg text-gray-600 mb-6">
-          En T-CERT potenciamos tu crecimiento profesional con herramientas de
-          calidad que te preparan para conquistar los desafíos del mercado.
-        </p>
-        <Button size="lg" variant="default">
+        <Button size="lg" variant="default" className="mt-4 xl:mb-32 mb-10">
           EXPLORAR CURSOS →
         </Button>
+
+        <HeroCarousel />
       </div>
     </section>
   );

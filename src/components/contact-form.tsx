@@ -14,71 +14,75 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
+import Notiflix from "notiflix";
 import { countries, Country } from "../../utils/countries";
 
 export default function ContactForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    console.log("Form submitted:", data);
+
+    try {
+      const response = await fetch("/api/send-emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        Notiflix.Notify.success("Formulario enviado exitosamente");
+        form.reset();
+      } else {
+        Notiflix.Notify.failure(
+          "Hubo un error al enviar el formulario. Inténtalo de nuevo."
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Notiflix.Notify.failure(
+        "No se pudo enviar el formulario. Verifica tu conexión."
+      );
+    }
   };
 
   return (
     <div className="relative min-h-screen bg-gray-50 p-4 md:p-8">
-      <div className="absolute inset-0 bg-[url('https://s3-alpha-sig.figma.com/img/03fb/d36b/201ccca1044519c63931535036fcc959?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TShujQed-ipdH2VNXiNkXBYw2~3Ogqh2fSkgqr34FhMd3GgyLYSwj-qpXfmnLGZfr~PiivhkhuhjXFs2Bpz4UwAt1aB2E-A1xUnos~yLDFZ2EPoniovUCOtNrnV7ih2tdjI0XnKFG1JVtfJaKopN4ccMxMJHoFarLpgNgaUiJofLQHelUB-ancHCZmWHGHAq3R4JtIhim-wAS9lmkaWw01PvQgkNPA~YFLfINOsXoX6s6bOlTnfJCJIHVyP8AFQ0bNggodjauLMfQfW7CFwaH5mKp9-oxJKgkD17rub~wYG8qOSj~Cted9H-~BIv3mGH10ZkjBA3SvQwO6SXhSmQZg__')] bg-cover bg-center opacity-10"></div>
-      <div className="relative mx-auto max-w-6xl">
-        {/* Title section - visible on all screens */}
-        <div className="mb-8 sm:hidden">
-          <h1 className="text-4xl font-bold tracking-tight">
-            FORMULARIO DE CONTACTO
-          </h1>
-          <p className="mt-4 text-gray-600">
-            Completa el formulario y nos pondremos en contacto contigo lo antes
-            posible
-          </p>
-        </div>
-
+      <div className="absolute inset-0 bg-[url('/bg-form-section.webp')] bg-cover bg-center opacity-80"></div>
+      <div className="relative mx-auto max-w-[95%] xl:max-w-[75%]">
         <div className="grid gap-8 md:grid-cols-2 md:gap-12">
-          {/* Quote section - Only visible on md and up */}
-          <div className="hidden md:block md:mt-20">
-            <h1 className="text-4xl font-bold tracking-tight">
+          <div className="hidden md:block"></div>
+
+          <Card className="p-6 animation">
+            <h1 className="text-xl font-bold tracking-tight text-[#27282B]">
               FORMULARIO DE CONTACTO
             </h1>
-            <p className="mt-4 text-gray-600">
+            <p className=" text-gray-600 text-sm mb-6 mt-3">
               Completa el formulario y nos pondremos en contacto contigo lo
               antes posible
             </p>
-
-            <p className="text-gray-700 text-3xl my-5 font-light">
-              <span className="text-4xl mt-1 text-indigo-600">&quot;</span>
-              El conocimiento es el puente hacia el progreso, y cada
-              certificación es un paso más hacia el futuro que construimos.
-              <span className="text-4xl mt-1 text-indigo-600">&quot; </span>
-            </p>
-          </div>
-
-          {/* Right Column - Form */}
-          <Card className="p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
+                {/* Campos del formulario */}
                 <div>
                   <Label htmlFor="name">Nombre*</Label>
                   <Input
                     id="name"
                     name="name"
-                    placeholder="Placeholder"
+                    placeholder="Ingrese su nombre completo"
                     required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="company">Empresa*</Label>
+                  <Label htmlFor="company">Empresa</Label>
                   <Input
                     id="company"
                     name="company"
-                    placeholder="Placeholder"
-                    required
+                    placeholder="Empresa donde trabaja"
                   />
                 </div>
 
@@ -88,7 +92,7 @@ export default function ContactForm() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Placeholder"
+                    placeholder="ejemplo@gmail.com"
                     required
                   />
                 </div>
@@ -96,7 +100,7 @@ export default function ContactForm() {
                 <div className="grid grid-cols-5 gap-2">
                   <div className="col-span-2">
                     <Label htmlFor="country">Teléfono*</Label>
-                    <Select defaultValue="+57">
+                    <Select defaultValue="+57" name="country">
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -123,17 +127,41 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <Label htmlFor="interest">¿En qué está interesado?*</Label>
+                  <Label htmlFor="interest">
+                    ¿En qué certificación está interesado/a?*
+                  </Label>
                   <Input
                     id="interest"
                     name="interest"
-                    placeholder="Placeholder"
+                    placeholder="Scrum Master, PMP, ITIL, etc."
                     required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="details">Detalles adicionales*</Label>
+                  <Label htmlFor="where">¿Dónde nos conociste?*</Label>
+                  <Select name="where">
+                    <SelectTrigger id="where">
+                      <SelectValue placeholder="Selecciona una opción" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="redes-sociales">
+                        Redes sociales
+                      </SelectItem>
+                      <SelectItem value="recomendacion">
+                        Recomendación
+                      </SelectItem>
+                      <SelectItem value="publicidad-online">
+                        Publicidad en línea
+                      </SelectItem>
+                      <SelectItem value="google">Búsqueda en Google</SelectItem>
+                      <SelectItem value="otro">Otro</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="details">Detalles adicionales</Label>
                   <Textarea
                     id="details"
                     name="details"

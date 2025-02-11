@@ -49,28 +49,23 @@ export default function CourseCarousel() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-[100%] mx-auto px-[10%] py-12">
+    <div className="relative w-full max-w-[100%] mx-auto px-[10%] xl:px-[20%] py-12">
       {/* Background Image */}
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-10"
-        style={{
-          backgroundImage: `url('https://s3-alpha-sig.figma.com/img/03fb/d36b/201ccca1044519c63931535036fcc959?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TShujQed-ipdH2VNXiNkXBYw2~3Ogqh2fSkgqr34FhMd3GgyLYSwj-qpXfmnLGZfr~PiivhkhuhjXFs2Bpz4UwAt1aB2E-A1xUnos~yLDFZ2EPoniovUCOtNrnV7ih2tdjI0XnKFG1JVtfJaKopN4ccMxMJHoFarLpgNgaUiJofLQHelUB-ancHCZmWHGHAq3R4JtIhim-wAS9lmkaWw01PvQgkNPA~YFLfINOsXoX6s6bOlTnfJCJIHVyP8AFQ0bNggodjauLMfQfW7CFwaH5mKp9-oxJKgkD17rub~wYG8qOSj~Cted9H-~BIv3mGH10ZkjBA3SvQwO6SXhSmQZg__')`,
-        }}
-      ></div>
+      <div className="absolute inset-0 w-full h-full bg-cover bg-center opacity-10 bg-[url('/bg-sections.jpeg')]"></div>
 
       {/* Overlay Content */}
-      <div className="relative z-10 text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2 text-[#27282B]">
+      <div className="relative z-10 text-center mb-8  animation ">
+        <h2 className="text-xl lg:text-3xl font-bold mb-2 text-[#27282B]">
           Nuestras Certificaciones Destacadas
         </h2>
-        <p className="text-[#27282B]">
+        <p className="sm:text-sm lg:text-base text-[#27282B]">
           Obten acceso a nuestras certificaciones, garantizamos un progreso
           seguro y efectivo.
         </p>
       </div>
 
       {/* Mobile Carousel */}
-      <div className="relative z-10 block md:hidden">
+      <div className="relative z-10 block md:hidden  ">
         <Carousel className="w-full" onSelect={setActiveSlide}>
           <CarouselContent>
             {courses.map((course) => (
@@ -106,7 +101,7 @@ export default function CourseCarousel() {
       </div>
 
       {/* Desktop Grid */}
-      <div className="relative z-10 hidden md:grid md:grid-cols-3 gap-6">
+      <div className="relative z-10 hidden md:grid md:grid-cols-3 gap-6 animation">
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
