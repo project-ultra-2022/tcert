@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Logo */}
           <div className="flex justify-center md:justify-start">
             <Image
-              src="/logo/complete/small_complete.png"
+              src="/logo/complete/sm-full-color.png"
               alt="Cert Logo"
               width={120}
               height={40}
@@ -30,7 +30,7 @@ export default function Footer() {
               href="/cursos"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Cursos
+              Certificaciones
             </Link>
             <Link
               href="/contactanos"

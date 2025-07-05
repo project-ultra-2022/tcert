@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
           <span className="font-light text-[#303030]">VERSIÓN DE TI MISMO</span>
         </h1>
         <Button size="lg" variant="default" className="mt-4 xl:mb-32 mb-10">
-          EXPLORAR CURSOS →
+          EXPLORAR CERTIFICACIONES →
         </Button>
 
         <HeroCarousel />
