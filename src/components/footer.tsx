@@ -21,19 +21,19 @@ export default function Footer() {
           {/* Navigation Links */}
           <nav className="flex flex-col items-center gap-4">
             <Link
-              href="/acerca-de"
+              href="/under-construction"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Acerca de
             </Link>
             <Link
-              href="/cursos"
+              href="/under-construction"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Certificaciones
             </Link>
             <Link
-              href="/contactanos"
+              href="/under-construction"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Contactanos

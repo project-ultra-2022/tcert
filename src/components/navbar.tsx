@@ -66,14 +66,11 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="outline" asChild>
-            <Link href="/">Iniciar sesión</Link>
-          </Button>
           <Button
             className="text-white bg-[#670EE2] hover:bg-[#670EE2]/90"
             asChild
           >
-            <Link href="/">Registrarse</Link>
+            <Link href="/under-construction">Iniciar sesión</Link>
           </Button>
         </div>
 
@@ -113,7 +110,7 @@ export function Navbar() {
                   className="text-white text-xl w-full"
                   asChild
                 >
-                  <Link href="/" onClick={() => setOpen(false)}>
+                  <Link href="/under-construction" onClick={() => setOpen(false)}>
                     Iniciar sesión
                   </Link>
                 </Button>
