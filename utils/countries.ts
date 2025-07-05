@@ -13,7 +13,6 @@ export const countries: Country[] = [
   { code: "AR", name: "Argentina", dial_code: "+54", flag: "🇦🇷" },
   { code: "AU", name: "Australia", dial_code: "+61", flag: "🇦🇺" },
   { code: "BR", name: "Brazil", dial_code: "+55", flag: "🇧🇷" },
-
   { code: "CN", name: "China", dial_code: "+86", flag: "🇨🇳" },
   { code: "EC", name: "Ecuador", dial_code: "+593", flag: "🇪🇨" },
   { code: "FR", name: "France", dial_code: "+33", flag: "🇫🇷" },

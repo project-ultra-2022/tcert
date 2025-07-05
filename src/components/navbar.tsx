@@ -35,7 +35,7 @@ export function Navbar() {
       <nav className="flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo/complete/small_complete.png"
+            src="/logo/complete/sm-full-color.png"
             alt="T-Cert Logo"
             width={120}
             height={40}
@@ -55,7 +55,7 @@ export function Navbar() {
             onClick={() => handleScroll("courses")}
             className="text-[#331263] font-extralight hover:text-[#670EE2]"
           >
-            Cursos
+            Certificaciones
           </button>
           <button
             onClick={() => handleScroll("contact")}
@@ -66,14 +66,11 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="outline" asChild>
-            <Link href="/">Iniciar sesión</Link>
-          </Button>
           <Button
             className="text-white bg-[#670EE2] hover:bg-[#670EE2]/90"
             asChild
           >
-            <Link href="/">Registrarse</Link>
+            <Link href="/under-construction">Iniciar sesión</Link>
           </Button>
         </div>
 
@@ -113,7 +110,7 @@ export function Navbar() {
                   className="text-white text-xl w-full"
                   asChild
                 >
-                  <Link href="/" onClick={() => setOpen(false)}>
+                  <Link href="/under-construction" onClick={() => setOpen(false)}>
                     Iniciar sesión
                   </Link>
                 </Button>
@@ -136,7 +133,7 @@ export function Navbar() {
                     setOpen(false);
                   }}
                 >
-                  Cursos
+                  Certificaciones
                 </Button>
                 <Button
                   variant="ghost"

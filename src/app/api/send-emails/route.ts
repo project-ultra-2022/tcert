@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
   const mailOptions = {
     from: "tcert.ultra@gmail.com",
-    to: "tcert.ultra@gmail.com",
+    to: "academicmanager@t-cert.us",
     subject: "Nuevo formulario de contacto",
     text: `
       Nombre: ${name}
